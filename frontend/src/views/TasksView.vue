@@ -268,9 +268,10 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
-import { ElMessage, ElMessageBox } from 'element-plus'
+import { ElMessage } from 'element-plus'
 import { Refresh } from '@element-plus/icons-vue'
 import { useTaskStore } from '../store'
+import { showConfirmDialog } from '../utils/confirmDialog'
 import api from '../api'
 
 const router = useRouter()
@@ -319,7 +320,7 @@ const terminateTask = async (taskId: number) => {
   actionType.value = 'terminate'
 
   try {
-    await ElMessageBox.confirm('确定要终止此任务吗？该操作不可逆。', '终止任务', {
+    await showConfirmDialog('确定要终止此任务吗？该操作不可逆。', '终止任务', {
       confirmButtonText: '终止',
       cancelButtonText: '取消',
       type: 'warning',
@@ -345,7 +346,7 @@ const deleteTask = async (taskId: number) => {
   actionType.value = 'delete'
 
   try {
-    await ElMessageBox.confirm('确定要删除此任务记录吗？该操作不会删除已经下载好的小说内容。', '删除任务', {
+    await showConfirmDialog('确定要删除此任务记录吗？该操作不会删除已经下载好的小说内容。', '删除任务', {
       confirmButtonText: '删除',
       cancelButtonText: '取消',
       type: 'warning',

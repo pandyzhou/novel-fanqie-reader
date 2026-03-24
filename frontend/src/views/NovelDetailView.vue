@@ -263,9 +263,10 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { ElMessage, ElMessageBox } from 'element-plus'
+import { ElMessage } from 'element-plus'
 import { RefreshRight, View, Download } from '@element-plus/icons-vue'
 import { useNovelStore } from '../store'
+import { showConfirmDialog } from '../utils/confirmDialog'
 import api from '../api'
 import type { ChapterSummary } from '../api'
 import {
@@ -382,7 +383,7 @@ const deleteNovel = async () => {
   if (!novelId.value || !novelStore.currentNovel) return
 
   try {
-    await ElMessageBox.confirm(
+    await showConfirmDialog(
       '确定要删除这本小说吗？已抓取章节、词云和导出文件会一起清理。若仍有进行中的任务将无法删除。',
       '删除小说',
       {

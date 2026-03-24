@@ -169,9 +169,10 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
-import { ElMessage, ElMessageBox } from 'element-plus'
-import { useNovelStore } from '../store'
+import { ElMessage } from 'element-plus'
 import type { NovelSummary } from '../api'
+import { useNovelStore } from '../store'
+import { showConfirmDialog } from '../utils/confirmDialog'
 
 const router = useRouter()
 const novelStore = useNovelStore()
@@ -201,7 +202,7 @@ const resolveCoverUrl = (row: NovelSummary): string => row.cover_image_url || ''
 
 const deleteNovel = async (row: NovelSummary) => {
   try {
-    await ElMessageBox.confirm(
+    await showConfirmDialog(
       `确定要删除《${row.title}》吗？已抓取章节、词云和导出文件会一起清理。若存在进行中的任务将无法删除。`,
       '删除小说',
       {

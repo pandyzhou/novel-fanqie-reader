@@ -57,7 +57,7 @@
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import { ElMessage, ElMessageBox } from 'element-plus'
+import { ElMessage } from 'element-plus'
 import { Search } from '@element-plus/icons-vue'
 import SearchHero from '../components/search/SearchHero.vue'
 import SearchResultsSection from '../components/search/SearchResultsSection.vue'
@@ -67,6 +67,7 @@ import {
 } from '../components/search/search.constants'
 import type { SearchSortField, SearchSortOrder } from '../components/search/search.types'
 import { useSearchFilters } from '../composables/useSearchFilters'
+import { showConfirmDialog } from '../utils/confirmDialog'
 import { useSearchLoadMore } from '../composables/useSearchLoadMore'
 import {
   isAlreadyActiveTaskError,
@@ -174,7 +175,7 @@ const handleBatchDownload = async () => {
   const alreadyReadyCount = displayedResults.value.length - downloadableResults.value.length
 
   try {
-    await ElMessageBox.confirm(
+    await showConfirmDialog(
       `确认将当前结果中的 ${downloadableResults.value.length} 本小说加入下载队列吗？${alreadyReadyCount > 0 ? `\n其中 ${alreadyReadyCount} 本已可读，将自动跳过。` : ''}`,
       '批量下载确认',
       {
