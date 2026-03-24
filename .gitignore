@@ -3,5 +3,14 @@ __pycache__
 node_modules
 data
 config.yml
+.env
+logs/
+backend/gunicorn.ctl
+backend/config.yml
+frontend/dist/
 .narrafork/
 .worktrees/
+tmp_*/
+ui-*.png
+26013-home*.png
+search-sort-final.png
